@@ -1,0 +1,1 @@
+The vulnerability is that buff in void handle_connection function has size of 1024. So I sended string that has more than 1024 chars. The message begin with 4 bytes for the message size. Because the string I send is bigger than the buff size, it's caused a segmentaion fault.

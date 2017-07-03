@@ -1,0 +1,13 @@
+First, I encoded my shellcode from q2 by xoring bytes that are >= 128 with 0xff.
+
+I used instead of nop in the command "inc ecx", with the opcode '\x41'. I chose ecx because it's a register that I didn't used.
+
+In the decoder:
+1. I got the start of the shellcode by substract esp by the lenght of the shellcode + 4 (4 for the return address)and then I puted the result in eax.
+2. I got 0xff by pushing zero to the stack, then pop it to ebx, and then dec it by 1. So, in ebx there is 0xffffffff and bl is 0xff.
+3. I found the offsets in the shellcode in which I need to xoring them by go over the original shellcode again.
+4. I taked care that in my decoder all bytes are < 0x80.
+
+In my python code in q3.py:
+I created a function that called 'create_decoder' which create decoder.asm file with the assembly instructions for the decoder.
+I implemented get_payload in a similar way to q2 (In this question I changed the nop and added the decoder to the message).

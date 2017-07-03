@@ -1,0 +1,10 @@
+
+I wrote a q2.c file that doing what the question ask (I opened a socket then I connected with it to the c&c server and then I used dup2 to redirect STDOUT, STDIN, STDERR).
+Then, I looked at it in ida to convert it to assembly for the shellcode.
+In the shellcode I first decreased the esp enough, so I will not override my own code.
+I basicaly copied the code from ida but changed the function call to jmp to the address of the plt functions, and the 
+strings I did like the previous exercise.
+
+I found the return address by looking in the memory with gdb, and I search an address that it's content fill with nops '\x90'.  
+
+In get_payload I returned size of the message + nop slide + my shellcode + return address.
